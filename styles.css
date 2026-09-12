@@ -215,20 +215,33 @@ h1 {
   background: var(--ink);
   color: var(--white);
   overflow: hidden;
-  white-space: nowrap;
 }
 
-.marquee span {
-  display: inline-block;
+/* The track holds four copies and slides by exactly half its width, so copies
+   three and four land where one and two began -- a seamless loop. Sliding a
+   two-copy span instead leaves a blank gap once the viewport is wider than a
+   single copy, which is what made the old marquee visibly run out. */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: slide 24s linear infinite;
+}
+
+.marquee-track span {
+  flex: 0 0 auto;
   padding: 0.75rem 0;
+  white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  animation: slide 24s linear infinite;
 }
 
 @keyframes slide {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }
 
 .section-heading {
