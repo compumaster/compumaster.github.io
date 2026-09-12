@@ -303,14 +303,18 @@ h1 {
 .card:nth-child(3n) { background: var(--violet); transform: rotate(-1deg); }
 .card:nth-child(4n) { background: var(--red); }
 
-.card:hover,
-.card:focus-visible {
+/* Only link cards get interactive affordances; .card-static is a plain panel
+   for work that has no public URL. */
+a.card:hover,
+a.card:focus-visible {
   transform: translate(-4px, -8px) rotate(0deg);
   box-shadow: 16px 16px 0 0 var(--ink);
   outline: none;
 }
 
-.card:active { transform: translate(6px, 6px); box-shadow: none; }
+a.card:active { transform: translate(6px, 6px); box-shadow: none; }
+
+.card-static { cursor: default; }
 
 .emoji {
   width: 3.5rem;
